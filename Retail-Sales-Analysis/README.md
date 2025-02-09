@@ -6,6 +6,72 @@ Glimplse of the dataset.
 
 ![alt text](<glimpse of the dataset.png>)
 
+## KEY INSIGHTS (after executing following SQL commands)
+1. There are 1987 rows in the database, and no any NULL values.
+2. Unique categories are
+    ```
+    Beauty
+    Cloting
+    Electronics
+    ```
+3. Category, with net sale and total orders are:
+    ```
+    # category, net_sale, total_orders
+    'Beauty', '286790', '611'
+    'Clothing', '309995', '698'
+    'Electronics', '311445', '678'
+    ```
+4. Average age of the customer by category
+    ```
+    # category, avg_age
+    'Beauty', '40.42'
+    'Clothing', '41.93'
+    'Electronics', '41.60'
+    ```
+5. Total number of transactions made by each gender in each category.
+    ```
+    # gender, category, total_txns
+    'Male', 'Beauty', '281'
+    'Female', 'Beauty', '330'
+    'Female', 'Clothing', '347'
+    'Male', 'Clothing', '351'
+    'Male', 'Electronics', '343'
+    'Female', 'Electronics', '335'
+    ```
+6. Month of the year where average sales is highest.
+    ```
+    # year, month, avg_sale
+    '2022', '7', '541.3414634146342'
+    '2023', '2', '535.531914893617'
+    ```
+7. Top 5 customers based on the highest total sales.
+    ```
+    # customer_id, net_sales
+    '3', '38440'
+    '1', '30750'
+    '5', '30405'
+    '2', '25295'
+    '4', '23580'
+    ```
+
+8. Unique customers who purchased items.
+    ```
+    # num_unique_customer, category
+    '141', 'Beauty'
+    '149', 'Clothing'
+    '144', 'Electronics'
+    ```
+
+9. Shift and number of orders
+    (Morning < 12, Afternoom between 12 and 17, and Evening > 17)
+    ```
+    # shift, num_orders
+    'Evening', '1062'
+    'Morning', '548'
+    'Afternoon', '377'
+    ```
+
+
 ### 1. Database Setup
 First we have to create a database in MySQL Workbench. The database name we kept is `p1_retail_db`.
 ```
