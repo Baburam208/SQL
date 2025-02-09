@@ -145,6 +145,8 @@ FROM (
 ) AS subquery;
 ```
 
+Then, the .csv file is easily converted to .xlsx file using python script `csv_2_xlsx.py`.
+
 ####  Find the number of products that have more than 3 variations.
 ```
 SELECT *
