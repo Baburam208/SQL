@@ -12,7 +12,7 @@ CREATE TABLE retail_sales
     gender VARCHAR(10),
     age INT,
     category VARCHAR(40),
-    quality INT,
+    quantity INT,
     price_per_unit FLOAT,
     cogs FLOAT,
     total_sale FLOAT
@@ -41,19 +41,15 @@ SELECT *
 FROM retail_sales
 WHERE 
 	sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR
-    gender IS NULL OR age IS NULL OR category IS NULL OR quality IS NULL OR
+    gender IS NULL OR age IS NULL OR category IS NULL OR quantity IS NULL OR
     price_per_unit IS NULL OR cogs IS NULL OR total_sale IS NULL;
     
 DELETE FROM retail_sales
 WHERE
 	sale_date IS NULL OR sale_time IS NULL OR customer_id IS NULL OR
-    gender IS NULL OR age IS NULL OR category IS NULL OR quality IS NULL OR
+    gender IS NULL OR age IS NULL OR category IS NULL OR quantity IS NULL OR
     price_per_unit IS NULL OR cogs IS NULL OR total_sale IS NULL;
-    
-
-ALTER TABLE retail_sales
-CHANGE COLUMN quality quantity INT;    
-
+      
 
 -- 3. Data Analysis & Findings
 -- 3.1 Write a SQL query to retrieve all columns for sales made on '2022-11-05'.
@@ -75,7 +71,7 @@ WHERE
 HAVING
 	MONTH(sale_date) = 11 AND YEAR(sale_date) = 2022;
     
--- OR
+-- OR (ERROR: TO_CHAR() does not exist)
 SELECT *
 FROM retail_sales
 WHERE
@@ -85,6 +81,7 @@ WHERE
     AND
     quantity >= 4;
     
+-- ERROR: Syntax error
 SELECT *
 FROM retail_sales
 WHERE
@@ -108,6 +105,13 @@ SELECT ROUND(AVG(age), 2) AS avg_age
 FROM retail_sales
 WHERE 
 	category = 'Beauty';
+    
+-- Average customer age by category.
+SELECT category, 
+	ROUND(AVG(age), 2) AS avg_age
+FROM retail_sales
+GROUP BY category
+;
     
 SELECT ROUND(AVG(age), 2) AS avg_age
 FROM retail_sales
@@ -169,7 +173,7 @@ LIMIT 5;
 
 -- 3.9 Write a SQL query to find the number of unique customers who purchased items
 -- from each category:
-SELECT COUNT(DISTINCT(customer_id)),
+SELECT COUNT(DISTINCT(customer_id)) AS num_unique_customer,
 category
 FROM retail_sales
 GROUP BY 2;
@@ -190,6 +194,7 @@ FROM retail_sales
 GROUP BY 1
 ;
 
+-- Using CTE
 WITH hourly_sale
 AS
 (
@@ -207,3 +212,5 @@ SELECT
 FROM hourly_sale
 GROUP BY shift;
 
+SELECT *
+FROM retail_sales;
